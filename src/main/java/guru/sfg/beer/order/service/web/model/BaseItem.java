@@ -24,7 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -38,12 +38,12 @@ public class BaseItem {
     @JsonProperty("version")
     private Integer version = null;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(shape=JsonFormat.Shape.STRING)
     @JsonProperty("createdDate")
-    private OffsetDateTime createdDate = null;
+    private LocalDateTime createdDate = null;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(shape=JsonFormat.Shape.STRING)
     @JsonProperty("lastModifiedDate")
-    private OffsetDateTime lastModifiedDate = null;
+    private LocalDateTime lastModifiedDate = null;
 }
 

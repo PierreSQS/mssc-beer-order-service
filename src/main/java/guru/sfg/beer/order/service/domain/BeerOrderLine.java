@@ -23,7 +23,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -36,7 +36,7 @@ import java.util.UUID;
 public class BeerOrderLine extends BaseEntity {
 
     @Builder
-    public BeerOrderLine(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
+    public BeerOrderLine(UUID id, Long version, LocalDateTime createdDate, LocalDateTime lastModifiedDate,
                          String upc, BeerOrder beerOrder, UUID beerId, Integer orderQuantity,
                          Integer quantityAllocated) {
         super(id, version, createdDate, lastModifiedDate);
