@@ -19,6 +19,11 @@ import java.util.UUID;
 public class BeerDto implements Serializable {
     private UUID id;
 
+    private String beerName;
+
+    private String beerStyle;
+
     private String upc;
+
 
 }

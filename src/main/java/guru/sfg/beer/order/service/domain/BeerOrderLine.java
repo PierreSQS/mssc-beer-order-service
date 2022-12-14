@@ -37,9 +37,11 @@ public class BeerOrderLine extends BaseEntity {
 
     @Builder
     public BeerOrderLine(UUID id, Long version, LocalDateTime createdDate, LocalDateTime lastModifiedDate,
-                         String upc, BeerOrder beerOrder, UUID beerId, Integer orderQuantity,
+                         String beerName,String upc, String beerStyle, BeerOrder beerOrder, UUID beerId, Integer orderQuantity,
                          Integer quantityAllocated) {
         super(id, version, createdDate, lastModifiedDate);
+        this.beerName = beerName;
+        this.beerStyle = beerStyle;
         this.upc = upc;
         this.beerOrder = beerOrder;
         this.beerId = beerId;
@@ -51,7 +53,10 @@ public class BeerOrderLine extends BaseEntity {
     private BeerOrder beerOrder;
 
     private UUID beerId;
+    private String beerName;
     private String upc;
+
+    private String beerStyle;
     private Integer orderQuantity = 0;
     private Integer quantityAllocated = 0;
 }

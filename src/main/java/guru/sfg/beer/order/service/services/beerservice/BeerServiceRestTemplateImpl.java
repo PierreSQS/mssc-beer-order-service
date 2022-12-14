@@ -4,13 +4,10 @@ import guru.sfg.beer.order.service.services.beerservice.model.BeerDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +16,7 @@ import java.util.UUID;
 public class BeerServiceRestTemplateImpl implements BeerService {
 
     private static final String BEER_SERV_PATH="/api/v1/beer";
+    private static final String UPC_SERV_PATH=BEER_SERV_PATH+"/beerUpc";
 
     private final RestTemplate restTemplate;
 
@@ -31,19 +29,23 @@ public class BeerServiceRestTemplateImpl implements BeerService {
 
     @Override
     public Optional<BeerDto> getBeerByID(UUID beerUuid) {
-        log.debug("Calling #getBeerById() in the Beer Service");
+        log.debug("Calling #getBeerByID() in the Beer Service");
 
         String url = String.format("%s/%s/%s",beerServiceHost,BEER_SERV_PATH, beerUuid);
 
         ResponseEntity<BeerDto> beerDtoRespEntity =
-                restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
-        }, beerUuid);
+                restTemplate.getForEntity(url, BeerDto.class);
 
-        return Optional.of(Objects.requireNonNull(beerDtoRespEntity.getBody()));
+        return Optional.ofNullable(beerDtoRespEntity.getBody());
     }
 
     @Override
     public Optional<BeerDto> getBeerByUPC(String upc) {
-        return Optional.empty();
+        log.debug("Calling #getBeerByUPC() in the Beer Service");
+
+        String url = String.format("%s/%s/%s",beerServiceHost,UPC_SERV_PATH, upc);
+
+        ResponseEntity<BeerDto> beerDtoRespEntity = restTemplate.getForEntity(url, BeerDto.class);
+        return Optional.ofNullable(beerDtoRespEntity.getBody());
     }
 }
