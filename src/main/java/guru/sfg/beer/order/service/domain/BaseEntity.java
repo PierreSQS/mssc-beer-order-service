@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * Created by jt on 2019-01-26.
+ * Modified by Pierrot on 2023-01-01.
  */
 
 @Setter
@@ -52,7 +52,7 @@ public class BaseEntity {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     @Type(type="org.hibernate.type.UUIDCharType")
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false )
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
     private UUID id;
 
     @Version
